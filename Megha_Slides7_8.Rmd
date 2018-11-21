@@ -1,0 +1,36 @@
+---
+title: "MA615_Officer_Project"
+author: "Megha Pandit"
+date: "November 12, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(officer)
+library(magrittr)
+library(tidyverse)
+library(readxl)
+```
+
+
+
+```{r}
+pres4 <- read_pptx("Default.pptx")
+layout_properties(pres4)
+
+master <- "Default Design"
+
+pres4 %<>%  add_slide(layout = "Title and Content", master = master) %>% 
+  ph_with_text(type = "title", str = "The Last Bear Market")%>%
+  ph_with_ul(type = "body", index = 1, str_list = c("Sep 30, 2002     Dow  7528", "Jan. 5, 2004      Dow  10,568", "Oct. 8, 2007      Dow   14093"), level_list = c(1,1,1))
+
+pres4 %<>% add_slide(layout = "Title and Content", master = master)%>%
+  ph_with_text(type = "title", str = "What do I do in a Bear Market")%>%
+  ph_with_ul(type = "body", index = 1, str_list = c("Decide whether this is a market correction or the start of something more", "Review the stocks you own", "Review stocks you wanted to own but were too expensive at time of research", "Check your portfolio for balance or the type of stocks you own"), level_list = c(1,1,1,1), style = fp_text(font.size = 32))
+
+
+print(pres4, target = "Megha_Slides.pptx") 
+```
+
+
